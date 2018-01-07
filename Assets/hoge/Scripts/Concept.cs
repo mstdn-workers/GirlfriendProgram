@@ -8,6 +8,7 @@ public class Concept : shell {
 	// Use this for initialization
 	void Start () {
         
+        //実体の制御
         if (entity)
         {
 
@@ -37,6 +38,10 @@ public class Concept : shell {
             }
         }
     }
+    /// <summary>
+    /// 修正必須
+    /// </summary>
+    /// <param name="technicData"></param>
     private void setTechnic(List<technic> technicData)
     {
         int original = getOriginal();
@@ -54,6 +59,7 @@ public class Concept : shell {
     void Update () {
 		
 	}
+
 }
 
 /// <summary>
@@ -100,7 +106,7 @@ abstract public class ghost : MonoBehaviour
 
         //Int32に変換する
         original = System.BitConverter.ToInt32(bs, 0);
-
+        Debug.Log(original);
     }
 }
 
