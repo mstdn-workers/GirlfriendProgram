@@ -7,29 +7,24 @@ public class Concept : shell {
 
 	// Use this for initialization
 	void Start () {
-        //testStub();
 
+        string text = null;
         //実体の制御
         if (entity)
         {
-
+            text = "実体があります";
         }
         else
         {
             GetComponent<Collider>().enabled = false;
             GetComponent<Renderer>().enabled = false;
+            text = "実体がありません";
         }
 
-        
+        Debug.Log(text);
 
 	}
 
-    private void testStub()
-    {
-        CSVManeger CSV = new CSVManeger();
-        List<string[]> csvData = CSV.readCSV("testData");
-        
-    }
 
     /// <summary>
     /// GameMasterからのデータセット用
@@ -124,7 +119,7 @@ abstract public class ghost : MonoBehaviour
 /// </summary>
 abstract public class shell : ghost
 {
-
+    
     public string basicName { protected internal set; get; }
     //耐久
     public int life { protected internal set; get; }
@@ -137,6 +132,7 @@ abstract public class shell : ghost
     //実体
     public bool entity { protected internal set; get; }
 
+    [SerializeField]
     protected List<technic> technicList;
     public technic gettechnicList(int num)
     {
