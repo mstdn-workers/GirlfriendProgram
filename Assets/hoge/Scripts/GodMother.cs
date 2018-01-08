@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
@@ -9,14 +8,14 @@ public class GodMother : MonoBehaviour {
     public int createNum;
     public GameObject obj;
     
-    static List<skill> skillData;
+    static List<Characteristic> CharacteristicData;
     static List<technic> technicData;
 
     // Use this for initialization
     void Start () {
         //別メソッドにして対応予定
         CSVManeger csv = new CSVManeger();
-        setSkillData(csv.readCSV("skillData"));
+        setCharacteristicData(csv.readCSV("CharacteristicData"));
         setTechnicData(csv.readCSV("technicData"));
         for(int i = 0; i < createNum; i++)
         {
@@ -24,14 +23,14 @@ public class GodMother : MonoBehaviour {
         }
 	}
 
-    void setSkillData(List<string[]> textData)
+    void setCharacteristicData(List<string[]> textData)
     {
         string[] data;
         for (int i = 1; i < textData.Count; i++)
         {
             data = textData[i];
 
-            skill setData = new skill();
+            Characteristic setData = new Characteristic();
 
             setData.keyNum = int.Parse(data[0]);
             setData.name = data[1];
@@ -39,7 +38,7 @@ public class GodMother : MonoBehaviour {
             setData.maxNum = int.Parse(data[3]);
             setData.point = int.Parse(data[4]);
             setData.description = data[5];
-            skillData.Add(setData);
+            CharacteristicData.Add(setData);
 
         }
     }

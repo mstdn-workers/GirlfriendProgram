@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Concept : shell {
 
-	// Use this for initialization
-	void Start () {
+    
+
+    // Use this for initialization
+    void Start () {
+        
 
         string text = null;
         //実体の制御
@@ -21,43 +24,10 @@ public class Concept : shell {
             text = "実体がありません";
         }
 
+        
         Debug.Log(text);
 
 	}
-
-
-    /// <summary>
-    /// GameMasterからのデータセット用
-    /// </summary>
-    /// <param name="skillData"></param>
-    private void setSkill(List<skill> skillData)
-    {
-        int original = getOriginal();
-        for (int i = 0; i < skillData.Count; i++)
-        {
-            if (skillData[i].minNum <= original && skillData[i].maxNum >= original)
-            {
-                setSkillList(skillData[i]);
-            }
-        }
-    }
-    /// <summary>
-    /// 修正必須
-    /// </summary>
-    /// <param name="technicData"></param>
-    private void setTechnic(List<technic> technicData)
-    {
-        int original = getOriginal();
-        for (int i = 0; i < technicData.Count; i++)
-        {
-            if (technicData[i].minNum <= original && technicData[i].maxNum >= original)
-            {
-                settechnicList(technicData[i]);
-            }
-        }
-    }
-
-
     // Update is called once per frame
     void Update () {
 		
@@ -67,18 +37,18 @@ public class Concept : shell {
 
 /// <summary>
 /// 実体最小分割クラス
-/// 継承を前提とする
+/// 本質のみを保持
 /// </summary>
 abstract public class ghost : MonoBehaviour
 {
-    [SerializeField]
-    private List<skill> skillList;
-    private skill getSkillList(int num)
+    #region 基本データ設定
+    private List<Characteristic> characteristicList;
+    protected Characteristic getCharacteristicList(int num)
     {
-        skill data;
+        Characteristic data;
         try
         {
-            data = skillList[num];
+            data = characteristicList[num];
         }
         catch (IndexOutOfRangeException)
         {
@@ -87,50 +57,53 @@ abstract public class ghost : MonoBehaviour
 
         return data;
     }
-    protected internal void setSkillList(skill data)
+    private void setCharacteristicList(Characteristic data)
     {
-        skillList.Add(data);
+        characteristicList.Add(data);
+    }
+    protected internal void setCharacteristic(List<Characteristic> characteristicData)
+    {
+
+        for (int i = 0; i < characteristicData.Count; i++)
+        {
+            if (characteristicData[i].minNum <= original && characteristicData[i].maxNum >= original)
+            {
+                setCharacteristicList(characteristicData[i]);
+            }
+        }
     }
 
-    private int original;
-    public int getOriginal()
-    {
-        return original;
-    }
+    protected internal int original { private set; get; }
+    #endregion
 
-    public ghost()
+    public virtual void Awake()
     {
-        //Int32と同じサイズのバイト配列にランダムな値を設定する
-        //byte[] bs = new byte[sizeof(int)];
-        byte[] bs = new byte[4];
-        System.Security.Cryptography.RNGCryptoServiceProvider rng =
-            new System.Security.Cryptography.RNGCryptoServiceProvider();
-        rng.GetBytes(bs);
-
-        //Int32に変換する
-        original = System.BitConverter.ToInt32(bs, 0);
-        Debug.Log(original);
+        original = UnityEngine.Random.Range(-10, 11); //-10~10
     }
 }
 
 /// <summary>
-/// 実体クラス
-/// 側面を生成する
+/// 外面クラス
+/// 本質から枝別れする性質を設定
 /// </summary>
 abstract public class shell : ghost
 {
-    
-    public string basicName { protected internal set; get; }
-    //耐久
-    public int life { protected internal set; get; }
-    public int lifeRisingValue { protected internal set; get; }
-    public int lifeDecreaseValue { protected internal set; get; }
-    //精神
-    public int mind { protected internal set; get; }
-    public int mindRisingValue { protected internal set; get; }
-    public int mindDecreaseValue { protected internal set; get; }
+    #region 基本データ設定
     //実体
     public bool entity { protected internal set; get; }
+
+    status status = new status();
+    protected internal void setStandard(string[] statusData)
+    {
+        status.keyNum = int.Parse(statusData[0]);
+        status.basicName = statusData[1];
+        status.life = int.Parse(statusData[2]);
+        status.lifeRisingValue = int.Parse(statusData[3]);
+        status.lifeDecreaseValue = int.Parse(statusData[4]);
+        status.mind = int.Parse(statusData[5]);
+        status.mindRisingValue = int.Parse(statusData[6]);
+        status.mindDecreaseValue = int.Parse(statusData[7]);
+    }
 
     [SerializeField]
     protected List<technic> technicList;
@@ -153,4 +126,35 @@ abstract public class shell : ghost
         technicList.Add(data);
     }
 
+    protected internal void setTechnic(List<technic> technicData)
+    {
+
+        for (int i = 0; i < technicData.Count; i++)
+        {
+            if (technicData[i].minNum <= original && technicData[i].maxNum >= original)
+            {
+                settechnicList(technicData[i]);
+            }
+        }
+    }
+    #endregion
+    public shell()
+    {
+        
+    }
+
+}
+
+public class status
+{
+    public int keyNum { protected internal set; get; }
+    public string basicName { protected internal set; get; }
+    //耐久
+    public int life { protected internal set; get; }
+    public int lifeRisingValue { protected internal set; get; }
+    public int lifeDecreaseValue { protected internal set; get; }
+    //精神
+    public int mind { protected internal set; get; }
+    public int mindRisingValue { protected internal set; get; }
+    public int mindDecreaseValue { protected internal set; get; }
 }

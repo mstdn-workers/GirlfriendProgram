@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 using System;
 
-abstract public class Characteristic // Characteristic:性質
+public class Characteristic // Characteristic:特性
 {
     public int keyNum { protected internal set; get; }
     public string name { protected internal set; get; }
