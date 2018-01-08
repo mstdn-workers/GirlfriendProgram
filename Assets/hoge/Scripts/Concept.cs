@@ -7,7 +7,8 @@ public class Concept : shell {
 
 	// Use this for initialization
 	void Start () {
-        
+        //testStub();
+
         //実体の制御
         if (entity)
         {
@@ -22,6 +23,13 @@ public class Concept : shell {
         
 
 	}
+
+    private void testStub()
+    {
+        CSVManeger CSV = new CSVManeger();
+        List<string[]> csvData = CSV.readCSV("testData");
+        
+    }
 
     /// <summary>
     /// GameMasterからのデータセット用

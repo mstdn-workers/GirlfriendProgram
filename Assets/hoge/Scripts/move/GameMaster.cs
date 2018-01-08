@@ -8,17 +8,13 @@ public class GameMaster : MonoBehaviour {
 
     public int moveTime;
 
-    private int date;
     Timer timer;
     Charcter charcter;
     private bool moveLock;
 
-    List<skill> skillData;
-    List<technic> technicData;
-
     private void Awake()
     {
-        date = 0;
+        
     }
 
     // Use this for initialization
@@ -28,41 +24,6 @@ public class GameMaster : MonoBehaviour {
         moveLock = false;
 
     }
-	
-    void setCSV(string dataName)
-    {
-        List<string[]> csvDatas = new List<string[]>();
-        TextAsset csv = Resources.Load("../Resourse/"+ dataName +".csv") as TextAsset;
-        StringReader reader = new StringReader(csv.text);
-        while (reader.Peek() > -1)
-        {
-            string line = reader.ReadLine();
-            csvDatas.Add(line.Split(',')); // リストに入れる
-        }
-    }
-    void setSkillData(string[] textData)
-    {
-        skill setData = new skill();
-        setData.keyNum  = Convert.ToInt32(textData[0]);
-        setData.name    = textData[1];
-        setData.minNum  = Convert.ToInt32(textData[2]);
-        setData.maxNum  = Convert.ToInt32(textData[3]);
-        setData.point   = Convert.ToInt32(textData[4]);
-        setData.description = textData[5];
-        skillData.Add(setData);
-    }
-    void setTechnicData(string[] textData)
-    {
-        technic setData = new technic();
-        setData.keyNum = Convert.ToInt32(textData[0]);
-        setData.name = textData[1];
-        setData.minNum = Convert.ToInt32(textData[2]);
-        setData.maxNum = Convert.ToInt32(textData[3]);
-        setData.point = Convert.ToInt32(textData[4]);
-        setData.description = textData[5];
-        technicData.Add(setData);
-    }
-
 
 	// Update is called once per frame
 	void Update () {
