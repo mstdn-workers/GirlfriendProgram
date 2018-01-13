@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.IO;
-using System;
-
-public class Characteristic // Characteristic:特性
+﻿/// <summary>
+/// 特性クラス
+/// ghostで使用
+/// 例）飢餓：性愛：探求
+/// </summary>
+public class Characteristic
 {
     public int keyNum { protected internal set; get; }
     public string name { protected internal set; get; }
@@ -15,7 +14,9 @@ public class Characteristic // Characteristic:特性
 }
 
 /// <summary>
-/// 精神的技術
+/// 精神的特徴
+/// shellで使用
+/// 例）几帳面：真面目：ドジっ子
 /// </summary>
 public class skill : Characteristic
 {
@@ -23,7 +24,9 @@ public class skill : Characteristic
 }
 
 /// <summary>
-/// 肉体的技術
+/// 肉体的特徴
+/// 実体で使用
+/// 例）強度：知識：性豪
 /// </summary>
 public class technic : Characteristic
 {

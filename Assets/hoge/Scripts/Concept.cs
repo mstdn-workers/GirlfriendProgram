@@ -91,18 +91,19 @@ abstract public class shell : ghost
     #region 基本データ設定
     //実体
     public bool entity { protected internal set; get; }
+    private int shellNum { set; get; }
 
-    status status = new status();
-    protected internal void setStandard(string[] statusData)
+    public status status { private get; set; }
+    protected internal void selectStatus(List<status> statusData)
     {
-        status.keyNum = int.Parse(statusData[0]);
-        status.basicName = statusData[1];
-        status.life = int.Parse(statusData[2]);
-        status.lifeRisingValue = int.Parse(statusData[3]);
-        status.lifeDecreaseValue = int.Parse(statusData[4]);
-        status.mind = int.Parse(statusData[5]);
-        status.mindRisingValue = int.Parse(statusData[6]);
-        status.mindDecreaseValue = int.Parse(statusData[7]);
+        for (int i = 1;i<statusData.Count;i++)
+        {
+            if (shellNum == statusData[i].keyNum)
+            {
+                status = statusData[i];
+                break;
+            }
+        }
     }
 
     [SerializeField]
@@ -121,19 +122,19 @@ abstract public class shell : ghost
 
         return data;
     }
-    public void settechnicList(technic data)
+    private void setTechnicList(technic data)
     {
         technicList.Add(data);
     }
 
-    protected internal void setTechnic(List<technic> technicData)
+    protected internal void selectTechnic(List<technic> technicData)
     {
 
         for (int i = 0; i < technicData.Count; i++)
         {
             if (technicData[i].minNum <= original && technicData[i].maxNum >= original)
             {
-                settechnicList(technicData[i]);
+                setTechnicList(technicData[i]);
             }
         }
     }
@@ -145,6 +146,9 @@ abstract public class shell : ghost
 
 }
 
+/// <summary>
+/// shell上の情報設定
+/// </summary>
 public class status
 {
     public int keyNum { protected internal set; get; }

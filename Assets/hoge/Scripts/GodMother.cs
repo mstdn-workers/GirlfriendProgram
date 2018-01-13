@@ -10,6 +10,7 @@ public class GodMother : MonoBehaviour {
     
     static List<Characteristic> CharacteristicData;
     static List<technic> technicData;
+    static List<status> statusData;
 
     // Use this for initialization
     void Start () {
@@ -58,6 +59,25 @@ public class GodMother : MonoBehaviour {
             technicData.Add(setData);
         }
     }
+    void setStatusData(List<string[]> textData)
+    {
+        string[] data;
+        for (int i = 1; i < textData.Count; i++)
+        {
+            data = textData[i];
+            status status = new status();
+            status.keyNum = int.Parse(data[0]);
+            status.basicName = data[1];
+            status.life = int.Parse(data[2]);
+            status.lifeRisingValue = int.Parse(data[3]);
+            status.lifeDecreaseValue = int.Parse(data[4]);
+            status.mind = int.Parse(data[5]);
+            status.mindRisingValue = int.Parse(data[6]);
+            status.mindDecreaseValue = int.Parse(data[7]);
+            statusData.Add(status);
+        }
+    }
+
 
     // Update is called once per frame
     void Update () {
