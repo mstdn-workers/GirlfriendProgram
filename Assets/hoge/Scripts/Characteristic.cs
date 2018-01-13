@@ -33,3 +33,19 @@ public class technic : Characteristic
 
 }
 
+/// <summary>
+/// shell上の情報設定
+/// </summary>
+public class status
+{
+    public int keyNum { protected internal set; get; }
+    public string basicName { protected internal set; get; }
+    //耐久
+    public int life { protected internal set; get; }
+    public int lifeRisingValue { protected internal set; get; }
+    public int lifeDecreaseValue { protected internal set; get; }
+    //精神
+    public int mind { protected internal set; get; }
+    public int mindRisingValue { protected internal set; get; }
+    public int mindDecreaseValue { protected internal set; get; }
+}

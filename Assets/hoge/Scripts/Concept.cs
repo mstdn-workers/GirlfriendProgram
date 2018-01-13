@@ -1,11 +1,8 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Concept : shell {
-
-    
 
     // Use this for initialization
     void Start () {
@@ -146,19 +143,3 @@ abstract public class shell : ghost
 
 }
 
-/// <summary>
-/// shell上の情報設定
-/// </summary>
-public class status
-{
-    public int keyNum { protected internal set; get; }
-    public string basicName { protected internal set; get; }
-    //耐久
-    public int life { protected internal set; get; }
-    public int lifeRisingValue { protected internal set; get; }
-    public int lifeDecreaseValue { protected internal set; get; }
-    //精神
-    public int mind { protected internal set; get; }
-    public int mindRisingValue { protected internal set; get; }
-    public int mindDecreaseValue { protected internal set; get; }
-}
