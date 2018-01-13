@@ -6,8 +6,11 @@ public class Concept : shell {
 
     // Use this for initialization
     void Start () {
-        
 
+        if (1 <= original)
+        {
+            entity = true;
+        }
         string text = null;
         //実体の制御
         if (entity)
@@ -22,7 +25,7 @@ public class Concept : shell {
         }
 
         
-        Debug.Log(text);
+        Debug.Log(text+":"+original);
 
 	}
     // Update is called once per frame
@@ -70,6 +73,7 @@ abstract public class ghost : MonoBehaviour
         }
     }
 
+    [SerializeField]
     protected internal int original { private set; get; }
     #endregion
 
